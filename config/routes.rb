@@ -7,6 +7,7 @@ Rails.application.routes.draw do
         collection do
           post 'login'
           post 'signup'
+          delete 'logout'
         end
       end
     end

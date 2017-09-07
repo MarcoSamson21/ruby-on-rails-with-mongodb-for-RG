@@ -52,6 +52,11 @@ class Api::V1::UsersController < Api::V1::ApiController
     end
   end
 
+  def logout
+    sign_out current_user
+    render json: {message: 'Logged out'}, status: 200
+  end
+
   private
 
   def login_params

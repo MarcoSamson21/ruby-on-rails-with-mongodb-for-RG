@@ -1,8 +1,11 @@
 class User
   include Mongoid::Document
   include Mongoid::Timestamps
+  include SimpleEnum::Mongoid
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
+  as_enum :role, contractor: 1, worker: 0
+  
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
