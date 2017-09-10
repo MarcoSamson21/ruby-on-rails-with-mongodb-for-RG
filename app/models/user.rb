@@ -4,8 +4,8 @@ class User
   include SimpleEnum::Mongoid
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-  as_enum :role, contractor: 1, worker: 0
-  
+  as_enum :role, admin: 1, sub_admin: 2, field_rep: 3
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
@@ -48,4 +48,7 @@ class User
   field :phone, type: String
   field :status, type: Integer
   field :avatar, type: String
+
+  has_many :jobs, class_name: Job.name, inverse_of: :contact, dependent: :destroy
+  has_many :leads, class_name: Lead.name
 end

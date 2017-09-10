@@ -54,3 +54,5 @@ gem 'mongoid', git: 'https://github.com/mongodb/mongoid.git'
 gem 'devise'
 gem 'cancancan', git: 'https://github.com/atherm/cancancan.git'
 gem 'simple_enum', '~> 2.0.0' , require: 'simple_enum/mongoid'
+gem "mongoid-paperclip", :require => "mongoid_paperclip"
+gem 'rack-cors', :require => 'rack/cors'

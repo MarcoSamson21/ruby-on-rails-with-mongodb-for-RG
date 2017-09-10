@@ -1,10 +1,11 @@
 class Api::V1::UsersController < Api::V1::ApiController
   before_action :authenticate_user!, except: [:login, :signup]
+  load_and_authorize_resource except: [:login, :signup]
   #BOILER PLATE CODE
 
   #GET /api/v1/users
   def index
-    @users = User.all
+    @users
   end
 
   # POST /api/v1/users
@@ -25,9 +26,9 @@ class Api::V1::UsersController < Api::V1::ApiController
 
   #POST /api/v1/users/login
   def login
-    current_user = User.find_by email: log_in_params[:email].downcase
+    current_user = User.find_by email: login_params[:email].downcase
 
-    if current_user.present? and current_user.valid_password? log_in_params[:password]
+    if current_user.present? and current_user.valid_password? login_params[:password]
       sign_in :user, current_user
 
       # Inform ability about the logged in user
