@@ -7,3 +7,4 @@ json.phone user.phone
 json.employee_id user.employee_id
 json.status user.status
 json.avatar user.avatar
+json.token user.token

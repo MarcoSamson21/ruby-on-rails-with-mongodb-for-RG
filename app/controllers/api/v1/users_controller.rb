@@ -30,7 +30,7 @@ class Api::V1::UsersController < Api::V1::ApiController
 
     if current_user.present? and current_user.valid_password? login_params[:password]
       sign_in :user, current_user
-
+      current_user.ensure_authentication_token
       # Inform ability about the logged in user
       current_ability
 

@@ -26,6 +26,7 @@ class User
   field :last_sign_in_at,    type: Time
   field :current_sign_in_ip, type: String
   field :last_sign_in_ip,    type: String
+  field :token,              type: String
 
   ## Confirmable
   # field :confirmation_token,   type: String
@@ -51,4 +52,15 @@ class User
 
   has_many :jobs, class_name: Job.name, inverse_of: :contact, dependent: :destroy
   has_many :leads, class_name: Lead.name
+
+  def ensure_authentication_token
+    self.update token: generate_authentication_token
+  end
+
+  def generate_authentication_token
+    loop do
+      token = Devise.friendly_token
+      break token unless User.where(token: token).first
+    end
+  end
 end
